@@ -6,5 +6,4 @@ The purpose of this application is to predict which auditees are most likely to 
 
 Please be informed that the results of [Mr. Eka CS's thesis research](https://bit.ly/thesis_MrEka) were used as the primary reference for developing this machine learning model.
 
-""")
 

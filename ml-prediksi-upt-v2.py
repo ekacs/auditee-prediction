@@ -7,14 +7,17 @@ from xgboost import XGBClassifier  # Mengimpor XGBClassifier dari pustaka xgboos
 st.write("""
 # AUDITEE PREDICTION APP 
 
-The purpose of this application is to predict which auditees are most likely to uncover state financial losses. The output of this application can then be used to inform the selection of audit targets. 
-[(Would you like to learn more about our article regarding this?)](https://bit.ly/Research_ekacs).
+Ini adalah aplikasi untuk memprediksi Kantor Satuan Kerja yang berpotensi terdapat temuan diantaranya:
+1) PNPB kurang pungut
+2) Denda keterlambatan pekerjaan belum dipungut, dan/atau
+3) Kelebihan pembayaran pekerjaan
 
-Please be informed that the results of [Mr. Eka CS's thesis research](https://bit.ly/thesis_MrEka) were used as the primary reference for developing this machine learning model.
-""")
+Dasar prediksi ini bekerja menggunakan algoritma machine learning XGbooster dan nilai variabel indikator kinerja keuangan Kantor Satuan Kerja sebagai inputnya
 
-st.subheader('User Input features')
-st.write("""Awaiting Excel file to be uploaded. Currently using example input parameters. [click for example XLSX input file](https://docs.google.com/spreadsheets/d/1-aQCD8iFIUuxkqZo1rvTl2mjoVVJAjL5?rtpof=true&usp=drive_fs)""")
+Prediksi ini terinspirasi dari hasil [thesis Sdr. Eka C. Setyawan](https://bit.ly/thesis_MrEka)""")
+
+st.subheader('Masukkan nilai indikator kinerja keuangan')
+st.write("""Silahkan memasukkan nilai indikator kinerja keuangan Kantor yang ingin diprediksi. [klik untuk format file inputnya](https://docs.google.com/spreadsheets/d/1-aQCD8iFIUuxkqZo1rvTl2mjoVVJAjL5?rtpof=true&usp=drive_fs)""")
 
 # Define the XGBoost model
 model = XGBClassifier(use_label_encoder=False, eval_metric='mlogloss')
@@ -63,10 +66,13 @@ if uploaded_file is not None:
     prediksi = load_model.predict(x_test)
     input_df['prediksi'] = prediksi
 
+    # Map numerical predictions to descriptive labels
+    input_df['prediksi_label'] = input_df['prediksi'].map({1: 'berpotensi', 0: 'tidak berpotensi'})
+
     st.write(input_df)
 
     def draw_pie_chart(data_frame):
-        value_counts = data_frame['prediksi'].value_counts()
+        value_counts = data_frame['prediksi_label'].value_counts()
         fig, ax = plt.subplots()
         ax.pie(value_counts, labels=value_counts.index, autopct='%1.1f%%', startangle=90)
         ax.axis('equal')
@@ -74,8 +80,8 @@ if uploaded_file is not None:
 
     def main():
         st.write(f"Jumlah UPT : {len(input_df)}")
-        st.write(f"Jumlah UPT yang berpotensi: {len(input_df.loc[input_df['prediksi']==1])}")
-        st.write(f"Jumlah UPT yang tidak berpotensi: {len(input_df.loc[input_df['prediksi'] == 0])}")
+        st.write(f"Jumlah UPT yang berpotensi: {len(input_df.loc[input_df['prediksi_label']=='berpotensi'])}")
+        st.write(f"Jumlah UPT yang tidak berpotensi: {len(input_df.loc[input_df['prediksi_label'] == 'tidak berpotensi'])}")
         draw_pie_chart(input_df)
 
     if __name__ == "__main__":

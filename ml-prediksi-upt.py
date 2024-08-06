@@ -176,6 +176,3 @@ if uploaded_file is not None:
         draw_pie_chart(input_df)
     if __name__ == "__main__":
         main()
-
-
-

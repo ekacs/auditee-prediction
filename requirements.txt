@@ -1,6 +1,15 @@
+streamlit
+pandas
+matplotlib==3.7.2
+scikit-learn
+openpyxl==3.1.2
+pickleshare==0.7.5
+'''
+sebelumnya 
 streamlit==1.25.0
 pandas==2.0.3
 matplotlib==3.7.2
 scikit-learn==1.3.0
 openpyxl==3.1.2
 pickleshare==0.7.5
+'''

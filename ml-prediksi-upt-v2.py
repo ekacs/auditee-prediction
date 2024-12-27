@@ -14,7 +14,8 @@ Ini adalah aplikasi untuk memprediksi Kantor Satuan Kerja yang berpotensi terdap
 
 Dasar prediksi ini bekerja menggunakan algoritma machine learning XGbooster dan nilai variabel indikator kinerja keuangan Kantor Satuan Kerja sebagai inputnya
 
-Prediksi ini terinspirasi dari hasil [thesis Sdr. Eka C. Setyawan](https://bit.ly/thesis_MrEka)""")
+Prediksi ini terinspirasi dari hasil [thesis Sdr. Eka C. Setyawan](https://bit.ly/thesis_MrEka) dan artikel rancangan pembuatan machine learning ini dapat dilihat di [karya tulis ini](https://tinyurl.com/ML-auditee-prediction)
+""")
 
 st.subheader('Masukkan nilai indikator kinerja keuangan')
 st.write("""Silahkan memasukkan nilai indikator kinerja keuangan Kantor yang ingin diprediksi. [klik untuk format file inputnya](https://docs.google.com/spreadsheets/d/1-aQCD8iFIUuxkqZo1rvTl2mjoVVJAjL5?rtpof=true&usp=drive_fs)""")
